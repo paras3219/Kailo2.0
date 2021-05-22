@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: _controller,
           items: [
             FloatingBottomBarItem(Icons.home, label: 'Home'),
-            FloatingBottomBarItem(Icons.face, label: 'Feed'),
+            FloatingBottomBarItem(FontAwesomeIcons.smile, label: 'Feed'),
             FloatingBottomBarItem(FontAwesomeIcons.bookOpen, label: 'Test'),
             FloatingBottomBarItem(FontAwesomeIcons.userAlt, label: 'Profile'),
           ],
