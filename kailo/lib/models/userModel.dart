@@ -6,14 +6,15 @@ class User0 {
   String status;
   int state;
   String profilePhoto;
+  List posts;
 
-  User0({
-    this.uid,
-    this.name,
-    this.email,
-    this.username,
-    this.profilePhoto,
-  });
+  User0(
+      {this.uid,
+      this.name,
+      this.email,
+      this.username,
+      this.profilePhoto,
+      this.posts});
 
   Map toMap(User0 user) {
     var data = Map<String, dynamic>();
@@ -22,6 +23,7 @@ class User0 {
     data['email'] = user.email;
     data['username'] = user.username;
     data["profile_photo"] = user.profilePhoto;
+    data["posts"] = [];
     return data;
   }
 
@@ -32,5 +34,6 @@ class User0 {
     this.email = mapData['email'];
     this.username = mapData['username'];
     this.profilePhoto = mapData['profile_photo'];
+    this.posts = mapData["posts"];
   }
 }

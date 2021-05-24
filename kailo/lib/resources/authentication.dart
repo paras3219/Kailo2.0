@@ -77,7 +77,8 @@ Future<void> addDataToDb(User currentUser) async {
       email: currentUser.email,
       name: currentUser.displayName,
       profilePhoto: currentUser.photoURL,
-      username: username);
+      username: username,
+      posts: []);
 
   firestore.collection("users").doc(currentUser.uid).set(user.toMap(user));
 }
