@@ -3,12 +3,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kailo/utils/PostItem.dart';
 
+import '../utils/PostItem.dart';
+import '../utils/constants.dart';
+import '../utils/constants.dart';
+
 class DashBoardScreen extends StatefulWidget {
   @override
   _DashBoardScreenState createState() => _DashBoardScreenState();
 }
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
+ 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -52,11 +57,19 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             );
           }
           index -= 1;
-          return PostItem(
-            content: "A VeryGood Day",
-            feeling: "Happy",
-            time: DateTime.now(),
-            likes: 20,
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+               
+              });
+            },
+            child: PostItem(
+              content: "A VeryGood Day",
+              feeling: "Happy",
+              time: DateTime.now(),
+              likes: 20,
+             
+            ),
           );
         },
       ),

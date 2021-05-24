@@ -2,7 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kailo/Screens/DashBoardScreen.dart';
+import 'package:kailo/Screens/testScreen.dart';
 import 'package:kailo/resources/authentication.dart';
+
+import 'userSettings.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -51,8 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             DashBoardScreen(),
             _image('https://picsum.photos/id/788/400/800'),
-            _image('https://picsum.photos/id/791/400/800'),
-            _image('https://picsum.photos/id/791/400/800'),
+            TestScreen(),
+            UserProfile(),
           ],
         ),
         extendBody: true,
