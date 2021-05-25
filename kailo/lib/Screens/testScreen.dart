@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kailo/models/textModel.dart';
 import 'package:kailo/utils/add_options.dart';
 import 'package:kailo/utils/constants.dart';
 
@@ -43,6 +44,10 @@ class TestScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<TestScreen> {
+  TestModel testModel = new TestModel();
+  double testScore = 0;
+
+  Map<dynamic,dynamic> resultDataMap;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +84,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(0,0),
+                AddOption(0, 0),
                 SizedBox(
                   height: 10,
                   child: Divider(
@@ -94,7 +99,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(1,0),
+                AddOption(1, 0),
                 SizedBox(
                   height: 10,
                   child: Divider(
@@ -109,7 +114,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(2,0),
+                AddOption(2, 0),
                 SizedBox(
                   height: 10,
                   child: Divider(
@@ -124,7 +129,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(3,0),
+                AddOption(3, 0),
                 SizedBox(
                   height: 10,
                   child: Divider(
@@ -139,7 +144,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(4,0),
+                AddOption(4, 0),
                 SizedBox(
                   height: 10,
                   child: Divider(
@@ -154,7 +159,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(5,0),
+                AddOption(5, 0),
                 SizedBox(
                   height: 10,
                   child: Divider(
@@ -169,7 +174,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(6,0),
+                AddOption(6, 0),
                 SizedBox(
                   height: 10,
                   child: Divider(
@@ -184,7 +189,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(7,0),
+                AddOption(7, 0),
                 SizedBox(
                   height: 10,
                   child: Divider(
@@ -199,7 +204,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(8,0),
+                AddOption(8, 0),
                 SizedBox(
                   height: 10,
                   child: Divider(
@@ -214,7 +219,7 @@ class _MyHomePageState extends State<TestScreen> {
                     fontSize: 17,
                   ),
                 ),
-                AddOption(9,0),
+                AddOption(9, 0),
                 SizedBox(
                   height: 15,
                 ),
@@ -224,8 +229,13 @@ class _MyHomePageState extends State<TestScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       for (int i = 0; i < scoreValues.length; i++) {
-                        print(scoreValues[i]);
+                        testScore += scoreValues[i];
                       }
+                      resultDataMap = {
+                        'result':testScore.toString(),
+                        'time':DateTime.now(),
+                      };
+                      testModel.uploadResult(resultDataMap);
                     },
                     child: Text('SUBMIT'),
                   ),
