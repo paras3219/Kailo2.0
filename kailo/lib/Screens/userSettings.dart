@@ -350,7 +350,6 @@ class _MyHealthState extends State<MyHealth> {
                           boxShadow: [
                             BoxShadow(color: Colors.grey, blurRadius: 3)
                           ]),
-                          
                     );
                   }),
             ],

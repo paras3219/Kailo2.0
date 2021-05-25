@@ -201,7 +201,10 @@ class _EditUserSettingsState extends State<EditUserSettings> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeScreen()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
