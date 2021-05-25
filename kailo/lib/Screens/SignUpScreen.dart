@@ -17,6 +17,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _password;
   bool isLoading = false;
   bool showLoading = false;
+  bool isLoginPressed = false;
+
+  void authenticateUsers(UserCredential user) {
+    authenticateUser(user).then((isNewUser) {
+      setState(() {
+        isLoginPressed = false;
+      });
+      if (isNewUser) {
+        addDataToDb(user.user).then((value) => Navigator.of(context)
+            .pushReplacement(
+                MaterialPageRoute(builder: (context) => HomeScreen())));
+      } else {
+        return Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomeScreen()));
+      }
+    });
+  }
 
   registerUser() async {
     _formKey.currentState.save();
@@ -35,8 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             isLoading = false;
             showLoading = false;
           });
-          return Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => HomeScreen()));
+          authenticateUsers(isSignedIn);
         }
       }
     } catch (e) {
