@@ -24,13 +24,13 @@ class BlurryDialog extends StatelessWidget {
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text("Continue"),
+              child: new Text("Yes"),
               onPressed: () {
                 continueCallBack();
               },
             ),
             new FlatButton(
-              child: Text("Cancel"),
+              child: Text("No"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

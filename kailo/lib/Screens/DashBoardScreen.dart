@@ -20,7 +20,7 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   String name;
-  String profilePhoto = "https://picsum.photos/id/788/400/800";
+  String profilePhoto = "http://simpleicon.com/wp-content/uploads/account.png";
   List<PostModel> posts = [];
   bool isLoading = false;
   void currentUser() async {
@@ -85,13 +85,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 : Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 0, left: 30, right: 30),
+                        margin: EdgeInsets.only(top: 20, left: 30, right: 30),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CircleAvatar(
                               radius: 27,
-                              backgroundColor: Colors.purpleAccent,
+                              backgroundColor: Colors.grey[400],
                               backgroundImage: NetworkImage(profilePhoto),
                             ),
                             IconButton(
