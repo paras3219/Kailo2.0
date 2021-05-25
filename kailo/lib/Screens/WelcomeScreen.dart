@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:kailo/Screens/login_screen.dart';
 
+import 'home_screen.dart';
+
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => LoginScreen())),
+                    MaterialPageRoute(builder: (context) => HomeScreen())),
                 child: Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width * 0.75,
