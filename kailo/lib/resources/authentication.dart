@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kailo/models/userModel.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
+final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 Future<UserCredential> signInWithGoogle() async {
   // Trigger the authentication flow
@@ -53,6 +56,37 @@ Future<UserCredential> loginUser(String email, String password) async {
     }
   }
   return user;
+}
+
+Future<bool> authenticateUser(UserCredential user) async {
+  QuerySnapshot result = await firestore
+      .collection("users")
+      .where("email", isEqualTo: user.user.email)
+      .get();
+
+  final List<DocumentSnapshot> docs = result.docs;
+
+  return docs.length == 0 ? true : false;
+}
+
+Future<void> addDataToDb(User currentUser) async {
+  String username = currentUser.displayName;
+
+  User0 user = User0(
+      uid: currentUser.uid,
+      email: currentUser.email,
+      name: currentUser.displayName,
+      profilePhoto: currentUser.photoURL,
+      username: username,
+      posts: []);
+
+  firestore.collection("users").doc(currentUser.uid).set(user.toMap(user));
+}
+
+Future<User> getCurrentUser() async {
+  User currentUser;
+  currentUser = auth.currentUser;
+  return currentUser;
 }
 
 Future<User> signOutUser() async {

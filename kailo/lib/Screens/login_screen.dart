@@ -21,6 +21,39 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   bool showLoading = false;
 
+  bool isLoginPressed = false;
+
+  void performLogin() async {
+    setState(() {
+      isLoginPressed = true;
+    });
+    UserCredential user = await signInWithGoogle();
+
+    if (user.user != null) {
+      print("there---------------------------------------");
+      authenticateUsers(user);
+    }
+    setState(() {
+      isLoginPressed = false;
+    });
+  }
+
+  void authenticateUsers(UserCredential user) {
+    authenticateUser(user).then((isNewUser) {
+      setState(() {
+        isLoginPressed = false;
+      });
+      if (isNewUser) {
+        addDataToDb(user.user).then((value) => Navigator.of(context)
+            .pushReplacement(
+                MaterialPageRoute(builder: (context) => HomeScreen())));
+      } else {
+        return Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomeScreen()));
+      }
+    });
+  }
+
   logInUser(BuildContext context) async {
     _formKey.currentState.save();
     print(_email);
@@ -53,7 +86,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         backgroundColor: HexColor("#000022"),
         body: SingleChildScrollView(
           child: Column(
@@ -163,15 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: new BorderRadius.circular(20.0),
                       ),
                     ),
-                    onPressed: () {
-                      signInWithGoogle().then((user) => {
-                            if (user != null)
-                              {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => HomeScreen()))
-                              }
-                          });
-                    },
+                    onPressed: () => performLogin(),
                     child: Container(
                       alignment: Alignment.center,
                       width: MediaQuery.of(context).size.width * 0.82,
@@ -228,6 +252,5 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ));
-
   }
 }

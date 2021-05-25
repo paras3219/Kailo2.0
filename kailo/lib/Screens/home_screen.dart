@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kailo/Screens/DashBoardScreen.dart';
+import 'package:kailo/Screens/add_activity.dart';
+import 'package:kailo/Screens/userSettings.dart';
 import 'package:kailo/Screens/testScreen.dart';
 import 'package:kailo/resources/authentication.dart';
 
@@ -80,18 +82,18 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
-        floatingActionButton: showFloatingActionButton(),
+        floatingActionButton: showFloatingActionButton(context),
       ),
     );
   }
 
-  Widget showFloatingActionButton() {
+  Widget showFloatingActionButton(BuildContext context) {
     print(pageIndex);
+    print("----------------------------------------------------");
     if (pageIndex < 2.0) {
       return FloatingActionButton(
-        onPressed: () {
-          // Add your onPressed code here!
-        },
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (conext) => AddActivity())),
         child: const FaIcon(FontAwesomeIcons.pen),
         backgroundColor: Colors.purple[400],
       );

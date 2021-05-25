@@ -6,12 +6,14 @@ class PostItem extends StatefulWidget {
   String feeling;
   int likes;
   DateTime time;
+  String title;
 
   PostItem({
     this.content,
     this.feeling,
     this.likes,
     this.time,
+    this.title,
   });
 
   @override
@@ -24,8 +26,9 @@ class _PostItemState extends State<PostItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
       height: 200,
+      width: 10,
+      margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
       decoration: BoxDecoration(
           boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 8.0)],
           color: Colors.white70,
@@ -40,9 +43,9 @@ class _PostItemState extends State<PostItem> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  ("30"),
+                  widget.time.toString().split(" ")[1],
                   style: TextStyle(
-                      fontSize: 60.0,
+                      fontSize: 10.0,
                       fontStyle: FontStyle.italic,
                       color: Colors.white70),
                 ),
@@ -88,7 +91,7 @@ class _PostItemState extends State<PostItem> {
                   width: MediaQuery.of(context).size.width * 0.65,
                   child: Center(
                       child: Text(
-                    "Highlight of your day",
+                    widget.title,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   )),
                   //color: Colors.yellow,
@@ -99,7 +102,7 @@ class _PostItemState extends State<PostItem> {
                   width: MediaQuery.of(context).size.width * 0.65,
                   child: Center(
                     child: Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt....",
+                      widget.content,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16.0),
                     ),
