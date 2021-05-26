@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kailo/utils/constants.dart';
+import 'package:awesome_slider/awesome_slider.dart';
 
 class AddOption extends StatefulWidget {
   final int questionIndex;
@@ -17,18 +18,28 @@ class _AddOptionState extends State<AddOption> {
         padding: EdgeInsets.all(8.0),
         child: Padding(
           padding: EdgeInsets.all(10.0),
-          child: Slider(
-            value: widget.rating,
-            onChanged: (newRating) {
-              scoreValues[widget.questionIndex] = newRating;
-              setState(() {
-                widget.rating = newRating;
-              });
-            },
-            min: 0,
-            max: 4,
-            divisions: 4,
-            label: widget.rating.round().toString(),
+          child: SliderTheme(
+            data: SliderThemeData(
+              activeTickMarkColor: Colors.white,
+              inactiveTrackColor: Colors.grey,
+              activeTrackColor: Colors.purple.shade400,
+              thumbColor: Colors.purple.shade600,
+              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
+            ),
+            child: Slider(
+              value: widget.rating,
+              onChanged: (newRating) {
+                scoreValues[widget.questionIndex] = newRating;
+                setState(() {
+                  widget.rating = newRating;
+                 
+                });
+              },
+              min: 0,
+              max: 4,
+              divisions: 4,
+              label: widget.rating.round().toString(),
+            ),
           ),
         ),
       ),
