@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kailo/Screens/resultsPage.dart';
 import 'package:kailo/models/textModel.dart';
+import 'package:kailo/resources/authentication.dart';
 import 'package:kailo/utils/add_options.dart';
 import 'package:kailo/utils/constants.dart';
 
@@ -44,27 +48,19 @@ class TestScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<TestScreen> {
-  TestModel testModel = new TestModel();
-  double testScore = 0;
-
-  Map<dynamic,dynamic> resultDataMap;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          width: 270,
+        foregroundColor: Colors.grey,
+        title: Center(
           child: Text(
-            'Questions',
+            'Stress Test',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.blue,
+              color: Colors.black54,
             ),
           ),
-        ),
-        leading: new IconButton(
-          icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -72,15 +68,15 @@ class _MyHomePageState extends State<TestScreen> {
       ),
       body: Container(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 18.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Text(
-                  '1. How often have you been upset because of something that happened unexpectedly?',
-                  textAlign: TextAlign.left,
+                  'How often have you been upset because of something that happened unexpectedly?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
                     fontSize: 17,
                   ),
                 ),
@@ -91,11 +87,12 @@ class _MyHomePageState extends State<TestScreen> {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 Text(
-                  '2. How often have you felt that you were unable to control the important things in your life?',
-                  textAlign: TextAlign.left,
+                  'How often have you felt that you were unable to control the important things in your life?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
                     fontSize: 17,
                   ),
                 ),
@@ -106,11 +103,12 @@ class _MyHomePageState extends State<TestScreen> {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 Text(
-                  '3. How often have you felt nervous and stressed?',
-                  textAlign: TextAlign.left,
+                  'How often have you felt nervous and stressed?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
                     fontSize: 17,
                   ),
                 ),
@@ -121,11 +119,12 @@ class _MyHomePageState extends State<TestScreen> {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 Text(
-                  '4. How often have you felt confident about your ability to handle your personal problems?',
-                  textAlign: TextAlign.left,
+                  'How often have you felt confident about your ability to handle your personal problems?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
                     fontSize: 17,
                   ),
                 ),
@@ -136,11 +135,12 @@ class _MyHomePageState extends State<TestScreen> {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 Text(
-                  '5. How often have you felt that things were going your way?',
-                  textAlign: TextAlign.left,
+                  'How often have you felt that things were going your way?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
                     fontSize: 17,
                   ),
                 ),
@@ -151,11 +151,12 @@ class _MyHomePageState extends State<TestScreen> {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 Text(
-                  '6. How often have you found that you could not cope with all the things that you had to do?',
-                  textAlign: TextAlign.left,
+                  'How often have you found that you could not cope with all the things that you had to do?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
                     fontSize: 17,
                   ),
                 ),
@@ -166,10 +167,12 @@ class _MyHomePageState extends State<TestScreen> {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 Text(
-                  '7. How often have you been able to control irritations in your life?',
-                  textAlign: TextAlign.left,
+                  'How often have you been able to control irritations in your life?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
+                    fontWeight: FontWeight.w500,
                     fontFamily: 'Roboto',
                     fontSize: 17,
                   ),
@@ -181,11 +184,12 @@ class _MyHomePageState extends State<TestScreen> {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 Text(
-                  '8. How often have you felt that you were on top of things?',
-                  textAlign: TextAlign.left,
+                  'How often have you felt that you were on top of things?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
                     fontSize: 17,
                   ),
                 ),
@@ -196,11 +200,12 @@ class _MyHomePageState extends State<TestScreen> {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 Text(
-                  '9. How often have you been angered because of things that happened that were outside of your control?',
-                  textAlign: TextAlign.left,
+                  'How often have you been angered because of things that happened that were outside of your control?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
                     fontSize: 17,
                   ),
                 ),
@@ -211,11 +216,12 @@ class _MyHomePageState extends State<TestScreen> {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 20.0),
                 Text(
-                  '10. How often have you felt difficulties were piling up so high that you could not overcome them?',
-                  textAlign: TextAlign.left,
+                  'How often have you felt difficulties were piling up so high that you could not overcome them?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
                     fontSize: 17,
                   ),
                 ),
@@ -224,20 +230,24 @@ class _MyHomePageState extends State<TestScreen> {
                   height: 15,
                 ),
                 SizedBox(
-                  width: 400.0,
+                  width: MediaQuery.of(context).size.width / 2,
                   height: 50.0,
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.yellow.shade700,
+                    ),
                     onPressed: () {
-                      for (int i = 0; i < scoreValues.length; i++) {
-                        testScore += scoreValues[i];
-                      }
-                      resultDataMap = {
-                        'result':testScore.toString(),
-                        'time':DateTime.now(),
-                      };
-                      testModel.uploadResult(resultDataMap);
+                      setState(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResultsPage()));
+                      });
                     },
-                    child: Text('SUBMIT'),
+                    child: Text(
+                      'SUBMIT',
+                      style: ktextStyle().copyWith(color: Colors.black),
+                    ),
                   ),
                 ),
                 SizedBox(height: 100.0),

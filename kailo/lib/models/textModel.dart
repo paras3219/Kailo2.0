@@ -16,7 +16,5 @@ class TestModel {
     return data;
   }
 
-  uploadResult(dataMap) {
-    FirebaseFirestore.instance.collection("users").add(dataMap);
-  }
+  
 }
