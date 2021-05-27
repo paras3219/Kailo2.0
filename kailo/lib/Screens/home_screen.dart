@@ -8,6 +8,7 @@ import 'package:kailo/Screens/userSettings.dart';
 import 'package:kailo/Screens/testScreen.dart';
 import 'package:kailo/resources/authentication.dart';
 
+//import 'feedScreen.dart';
 import 'userSettings.dart';
 
 class HomeScreen extends StatefulWidget {

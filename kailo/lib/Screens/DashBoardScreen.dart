@@ -26,11 +26,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   void currentUser() async {
     User curr = await getCurrentUser();
     this.setState(() {
+
       if (curr.displayName != null) {
         name = curr.displayName.split(" ")[0];
         profilePhoto = curr.photoURL;
       } else {
         name = "";
+
       }
     });
   }

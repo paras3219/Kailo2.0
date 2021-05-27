@@ -1,9 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kailo/Screens/resultsPage.dart';
-import 'package:kailo/models/textModel.dart';
-import 'package:kailo/resources/authentication.dart';
 import 'package:kailo/utils/add_options.dart';
 import 'package:kailo/utils/constants.dart';
 
@@ -48,6 +44,7 @@ class TestScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<TestScreen> {
+  bool _leftQuestions = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -238,10 +235,18 @@ class _MyHomePageState extends State<TestScreen> {
                     ),
                     onPressed: () {
                       setState(() {
+                        for (int i = 0; i < scoreValues.length; i++) {
+                          if (i == 3 || i == 4 || i == 6 || i == 7) {
+                            finalTestScore += (4.0 - scoreValues[i]);
+                          } else {
+                            finalTestScore += scoreValues[i];
+                          }
+                        }
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ResultsPage()));
+                              builder: (context) => ResultsPage(),
+                            ));
                       });
                     },
                     child: Text(
