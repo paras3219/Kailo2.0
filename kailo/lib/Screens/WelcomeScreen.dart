@@ -59,7 +59,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => HomeScreen())),
+                    MaterialPageRoute(builder: (context) => LoginScreen())),
                 child: Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width * 0.75,

@@ -42,7 +42,11 @@ class _FeedCardState extends State<FeedCard> {
         .doc(widget.uid)
         .get();
     this.setState(() {
-      name = data.data()["name"];
+      if (data.data()["name"] == null) {
+        name = "Anoynomonous";
+      } else {
+        name = data.data()["name"];
+      }
       profilePhoto = data.data()["profile_photo"];
       isLoading = false;
     });

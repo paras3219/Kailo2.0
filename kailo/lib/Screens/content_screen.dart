@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:kailo/Screens/DashBoardScreen.dart';
 import 'package:kailo/models/PostModel.dart';
 import 'package:kailo/resources/authentication.dart';
 
