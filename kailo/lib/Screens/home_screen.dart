@@ -7,6 +7,7 @@ import 'package:kailo/Screens/userSettings.dart';
 import 'package:kailo/Screens/testScreen.dart';
 import 'package:kailo/resources/authentication.dart';
 
+//import 'feedScreen.dart';
 import 'userSettings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: _controller,
           children: <Widget>[
             DashBoardScreen(),
-            _image('https://picsum.photos/id/788/400/800'),
+            //FeedScreen(),
             TestScreen(),
             UserProfile(),
           ],

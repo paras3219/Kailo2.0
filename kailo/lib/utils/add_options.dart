@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kailo/utils/constants.dart';
-import 'package:awesome_slider/awesome_slider.dart';
 
 class AddOption extends StatefulWidget {
   final int questionIndex;

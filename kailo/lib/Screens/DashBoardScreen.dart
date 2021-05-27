@@ -22,7 +22,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   void currentUser() async {
     User curr = await getCurrentUser();
     this.setState(() {
-      name = curr.displayName.split(" ")[0];
+      if (curr.displayName != null)
+        name = curr.displayName.split(" ")[0];
+      else {
+        name = "Ankur";
+      }
     });
   }
 
