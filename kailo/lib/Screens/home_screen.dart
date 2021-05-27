@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kailo/Screens/DashBoardScreen.dart';
+import 'package:kailo/Screens/FeedScreen.dart';
 import 'package:kailo/Screens/add_activity.dart';
 import 'package:kailo/Screens/userSettings.dart';
 import 'package:kailo/Screens/testScreen.dart';
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: _controller,
           children: <Widget>[
             DashBoardScreen(),
-            //FeedScreen(),
+            FeedScreen(),
             TestScreen(),
             UserProfile(),
           ],

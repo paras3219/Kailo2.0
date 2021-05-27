@@ -31,7 +31,6 @@ class _AddOptionState extends State<AddOption> {
                 scoreValues[widget.questionIndex] = newRating;
                 setState(() {
                   widget.rating = newRating;
-                 
                 });
               },
               min: 0,

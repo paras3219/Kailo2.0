@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:kailo/Screens/DashBoardScreen.dart';
 import 'package:kailo/Screens/SignUpScreen.dart';
 import 'package:kailo/Screens/home_screen.dart';
 import 'package:kailo/resources/authentication.dart';
