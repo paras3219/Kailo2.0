@@ -15,6 +15,4 @@ class TestModel {
     data['time'] = test.time;
     return data;
   }
-
-  
 }

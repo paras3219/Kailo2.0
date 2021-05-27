@@ -39,5 +39,6 @@ class PostModel {
         new DateTime.fromMillisecondsSinceEpoch((mapData["time"].seconds));
     this.likes = mapData["likes"];
     this.title = mapData["title"];
+    this.uid = mapData["uid"];
   }
 }
