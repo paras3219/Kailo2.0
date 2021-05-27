@@ -25,8 +25,8 @@ class FeedCard extends StatefulWidget {
 }
 
 class _FeedCardState extends State<FeedCard> {
-  String name = null;
-  String profilePhoto = null;
+  String name;
+  String profilePhoto;
   bool isLoading = false;
 
   void increaseLikes() {
@@ -37,19 +37,22 @@ class _FeedCardState extends State<FeedCard> {
     this.setState(() {
       isLoading = true;
     });
-    var data = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(widget.uid)
-        .get();
-    this.setState(() {
-      if (data.data()["name"] == null) {
-        name = "Anoynomonous";
-      } else {
-        name = data.data()["name"];
-      }
-      profilePhoto = data.data()["profile_photo"];
-      isLoading = false;
-    });
+
+    try {
+      var data = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(widget.uid)
+          .get();
+      this.setState(() {
+        print(data.data());
+        name = data.data()["name"] == null ? "Anonymous" : data.data()["name"];
+        profilePhoto = data.data()["profile_photo"];
+        isLoading = false;
+      });
+    } catch (err) {
+      print("error");
+    }
+
   }
 
   @override
