@@ -73,11 +73,24 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => HomeScreen()));
       } else {
-        print("error");
+        print("error-------");
+        showDialog(
+            context: context,
+            builder: (context) {
+              Future.delayed(Duration(seconds: 1), () {
+                Navigator.of(context).pop(true);
+              });
+              return Container(
+                child: AlertDialog(
+                  title: Text(
+                    'Wrong Email or Password',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              );
+            });
       }
-    } catch (e) {
-      print("something went wrong");
-    }
+    } catch (e) {}
     setState(() {
       isLoading = false;
       showLoading = false;
@@ -143,6 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: TextFormField(
                       controller: _passwordController,
                       onSaved: (text) => this._password = text,
+                      obscureText: true,
                       decoration: new InputDecoration(
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,

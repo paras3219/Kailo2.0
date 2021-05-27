@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kailo/Screens/editDetails.dart';
+import 'package:kailo/resources/authentication.dart';
 
 class ViewUserSettings extends StatefulWidget {
   @override
@@ -7,6 +10,36 @@ class ViewUserSettings extends StatefulWidget {
 }
 
 class _ViewUserSettingsState extends State<ViewUserSettings> {
+  String bio;
+  String name;
+  int age;
+  String profilePhoto;
+  void createUserProfile() async {
+    User user = await getCurrentUser();
+    try {
+      var data = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user.uid)
+          .get();
+      this.setState(() {
+        name = data.data()["name"];
+        bio = data.data()["bio"];
+        age = data.data()["age"];
+        profilePhoto = data.data()["profile_photo"];
+      });
+      print(data.data()["profile_photo"]);
+    } catch (err) {
+      print("profile-----error");
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    createUserProfile();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +51,9 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
               Align(
                 alignment: Alignment.center,
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/profile.png'),
+                  backgroundImage: profilePhoto == null
+                      ? AssetImage('assets/images/profile.png')
+                      : NetworkImage(profilePhoto),
                   radius: 70.0,
                 ),
               ),
@@ -41,7 +76,7 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
                           heightFactor: 1,
                           alignment: Alignment.center,
                           child: Text(
-                            'Hello',
+                            name == null ? "No Name" : name,
                             style: TextStyle(
                               fontSize: 40.0,
                             ),
@@ -51,7 +86,7 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
                           heightFactor: 6.0,
                           alignment: Alignment.center,
                           child: Text(
-                            'Date Of Birth:',
+                            age == null ? 'Age: No age ' : "Age: ${age}",
                             style: TextStyle(
                               fontSize: 20.0,
                             ),
@@ -113,6 +148,8 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
                           child: Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              child: Text(bio == null ? "No Bio" : bio),
                               height: 250.0,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(

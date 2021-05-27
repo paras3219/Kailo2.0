@@ -39,7 +39,7 @@ class _ResultsPageState extends State<ResultsPage> {
         backgroundColor: Colors.deepPurple.shade400,
         shape: CustomShapeBorder(),
         title: Align(
-          widthFactor: 3.5,
+          widthFactor: 3,
           child: Column(
             children: [
               Container(
