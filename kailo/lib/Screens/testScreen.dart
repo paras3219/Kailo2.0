@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kailo/Screens/resultsPage.dart';
+import 'package:kailo/models/testModel.dart';
+import 'package:kailo/resources/authentication.dart';
 import 'package:kailo/utils/add_options.dart';
 import 'package:kailo/utils/constants.dart';
 
@@ -44,7 +48,21 @@ class TestScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<TestScreen> {
-  bool _leftQuestions = false;
+  Future<void> _addToDatabase(double score, DateTime dateTime) async {
+    User user = await getCurrentUser();
+    TestModel _testModel = new TestModel(
+      result: score,
+      uid: user.uid,
+      time: dateTime.toString(),
+    );
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .collection('results')
+        .doc(DateTime.now().toString())
+        .set(_testModel.toMap(_testModel));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -242,6 +260,7 @@ class _MyHomePageState extends State<TestScreen> {
                             finalTestScore += scoreValues[i];
                           }
                         }
+                        _addToDatabase(finalTestScore, DateTime.now());
                         Navigator.push(
                             context,
                             MaterialPageRoute(

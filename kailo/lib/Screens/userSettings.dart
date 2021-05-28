@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kailo/Screens/editDetails.dart';
 import 'package:kailo/Screens/viewUserSettings.dart';
-import 'package:kailo/utils/chart.dart';
 import 'package:kailo/utils/constants.dart';
+
+import 'myHealth.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -112,58 +111,3 @@ class _UserProfileState extends State<UserProfile> {
   }
 }
 
-class MyHealth extends StatefulWidget {
-  @override
-  _MyHealthState createState() => _MyHealthState();
-}
-
-class _MyHealthState extends State<MyHealth> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 25,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  "Your Health History",
-                  style: ktextStyle().copyWith(fontSize: 20.0),
-                ),
-              ),
-              Container(
-                height: 300,
-                width: MediaQuery.of(context).size.width,
-                child: MyHealthChart(),
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
-                      height: 100.0,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5.0),
-                          boxShadow: [
-                            BoxShadow(color: Colors.grey, blurRadius: 3)
-                          ]),
-                    );
-                  }),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}

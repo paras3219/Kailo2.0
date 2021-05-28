@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kailo/Screens/DashBoardScreen.dart';
 import 'package:kailo/Screens/FeedScreen.dart';
+import 'package:kailo/Screens/aboutUs.dart';
 import 'package:kailo/Screens/add_activity.dart';
 import 'package:kailo/Screens/userSettings.dart';
 import 'package:kailo/Screens/testScreen.dart';
 import 'package:kailo/resources/authentication.dart';
-
-//import 'feedScreen.dart';
 import 'userSettings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -35,20 +34,25 @@ class _HomeScreenState extends State<HomeScreen> {
           child: new ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-              // DrawerHeader(
-              //   child: Text('Drawer Header'),
-              //   decoration: BoxDecoration(
-              //     color: Colors.blue,
-              //   ),
-              // ),
               SizedBox(
                 height: 60,
               ),
               ListTile(
-                  title: Text('Logout'),
-                  onTap: () => signOutUser().then(
-                        (value) => Navigator.pop(context),
-                      ))
+                title: Text('About Us'),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AboutUs()));
+                },
+              ),
+              SizedBox(
+                height: 60,
+              ),
+              ListTile(
+                title: Text('Logout'),
+                onTap: () => signOutUser().then(
+                  (value) => Navigator.pop(context),
+                ),
+              )
             ],
           ),
         ),

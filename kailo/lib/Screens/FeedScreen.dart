@@ -59,7 +59,7 @@ class _FeedScreenState extends State<FeedScreen> {
           if (index == 0) {
             return isLoading
                 ? Center(
-                    child: Text("Loafding.."),
+                    child: Text("Loading.."),
                   )
                 : Column(
                     children: [

@@ -37,6 +37,7 @@ class _FeedCardState extends State<FeedCard> {
     this.setState(() {
       isLoading = true;
     });
+
     try {
       var data = await FirebaseFirestore.instance
           .collection("users")
@@ -51,6 +52,7 @@ class _FeedCardState extends State<FeedCard> {
     } catch (err) {
       print("error");
     }
+
   }
 
   @override
