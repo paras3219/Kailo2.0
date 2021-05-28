@@ -28,9 +28,25 @@ class _FeedCardState extends State<FeedCard> {
   String name;
   String profilePhoto;
   bool isLoading = false;
+  int likes = 0;
 
-  void increaseLikes() {
-    FirebaseFirestore.instance.collection("feed").doc(widget.uid);
+  void increaseLikes() async {
+    Stream<QuerySnapshot> stream =
+        FirebaseFirestore.instance.collection("feed").snapshots();
+    print("-----------------here-------------------");
+
+    stream.listen((snapshot) {
+      snapshot.docs.forEach((element) {
+        if (element.data()["title"] == widget.title) {}
+      });
+    });
+
+    // print(data.data());
+
+    print("########################");
+    this.setState(() {
+      likes = likes == 0 ? 1 : 0;
+    });
   }
 
   void createName() async {
@@ -52,7 +68,6 @@ class _FeedCardState extends State<FeedCard> {
     } catch (err) {
       print("error");
     }
-
   }
 
   @override
@@ -147,10 +162,17 @@ class _FeedCardState extends State<FeedCard> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(FontAwesomeIcons.heart),
+                              InkWell(
+                                  onTap: () => increaseLikes(),
+                                  child: Icon(
+                                    likes == 0
+                                        ? FontAwesomeIcons.heart
+                                        : FontAwesomeIcons.solidHeart,
+                                    color: Colors.red,
+                                  )),
                               SizedBox(height: 2.0),
                               Text(
-                                widget.likes.toString(),
+                                likes.toString(),
                               ),
                             ],
                           ),

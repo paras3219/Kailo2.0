@@ -76,7 +76,7 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
                           heightFactor: 1,
                           alignment: Alignment.center,
                           child: Text(
-                            name == null ? "No Name" : name,
+                            name == null ? " " : name,
                             style: TextStyle(
                               fontSize: 40.0,
                             ),
@@ -86,7 +86,7 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
                           heightFactor: 6.0,
                           alignment: Alignment.center,
                           child: Text(
-                            age == null ? 'Age: No age ' : "Age: ${age}",
+                            age == null ? 'Age:  ' : "Age: ${age}",
                             style: TextStyle(
                               fontSize: 20.0,
                             ),

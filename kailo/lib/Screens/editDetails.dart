@@ -1,11 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kailo/Screens/home_screen.dart';
-import 'package:kailo/Screens/userSettings.dart';
+
 import 'package:kailo/resources/authentication.dart';
 import 'package:kailo/utils/constants.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditUserSettings extends StatefulWidget {
   @override
