@@ -85,7 +85,7 @@ class _ContentScreenState extends State<ContentScreen> {
                         hoverColor: Colors.white,
                         fillColor: Colors.deepPurpleAccent[100],
                         filled: true,
-                        hintText: "Enter the title of you story",
+                        hintText: "Highlights Of Your Day",
                         hintStyle: TextStyle(fontSize: 22, color: Colors.white),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
