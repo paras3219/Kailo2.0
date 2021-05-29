@@ -69,7 +69,7 @@ class _FeedScreenState extends State<FeedScreen> {
                         height: 40,
                       ),
                       Container(
-                        child: Text("Feed",
+                        child: Text("Global Feed",
                             style: GoogleFonts.roboto(
                                 fontSize: 40,
                                 letterSpacing: 4,

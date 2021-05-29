@@ -31,8 +31,6 @@ class _MyHealthState extends State<MyHealth> {
         this.setState(() {
           prevResult.add(test);
         });
-        print("asdfghjhgfdfghgf");
-        print(prevResult[0].result);
       });
     });
   }
@@ -40,6 +38,7 @@ class _MyHealthState extends State<MyHealth> {
   @override
   void initState() {
     resultsHistory();
+
     // TODO: implement initState
     super.initState();
   }
@@ -66,7 +65,7 @@ class _MyHealthState extends State<MyHealth> {
               Container(
                 height: 300,
                 width: MediaQuery.of(context).size.width,
-                child: MyHealthChart(),
+                child: MyHealthChart(prevResult, prevResult.length),
               ),
               SizedBox(height: 5.0),
               ListView.builder(
@@ -82,37 +81,11 @@ class _MyHealthState extends State<MyHealth> {
                       height: 100.0,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                          gradient: test.result >= 0 && test.result <= 13
-                              ? LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                      Color(0xff380ff72),
-                                      Color(0xff57ee8fa),
-                                    ])
+                          color: test.result >= 0 && test.result <= 13
+                              ? Colors.green.shade300
                               : test.result > 13 && test.result < 27
-                                  ? LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      stops: [
-                                          0.1,
-                                          .8,
-                                        ],
-                                      colors: [
-                                          Color(0xffffdd00),
-                                          Color(0xfffbb034),
-                                        ])
-                                  : LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      stops: [
-                                          0.1,
-                                          .8,
-                                        ],
-                                      colors: [
-                                          Color(0xfffbd72b),
-                                          Color(0xfff9484a),
-                                        ]),
+                                  ? Colors.yellow.shade300
+                                  : Colors.red.shade300,
                           borderRadius: BorderRadius.circular(5.0),
                           boxShadow: [
                             BoxShadow(color: Colors.grey, blurRadius: 3)

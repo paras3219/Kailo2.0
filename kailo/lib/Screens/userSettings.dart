@@ -14,11 +14,13 @@ class _UserProfileState extends State<UserProfile> {
   PageController _userSettingsPageController = new PageController();
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Expanded(
+
             child: Container(
               margin: EdgeInsets.fromLTRB(0, 60, 0, 0),
               padding: EdgeInsets.all(3.0),
@@ -39,26 +41,25 @@ class _UserProfileState extends State<UserProfile> {
                         selectedSettingType = userSettingsOrHealth.profile;
                       });
                     },
-                    child: Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(right: 14),
-                        width: MediaQuery.of(context).size.width / 2.3,
-                        decoration: BoxDecoration(
-                            color: selectedSettingType ==
-                                    userSettingsOrHealth.profile
-                                ? Colors.deepPurple.shade800
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(50.0)),
-                        child: Center(
-                          child: Text(
-                            'Profile',
-                            style: ktextStyle().copyWith(
-                                color: selectedSettingType ==
-                                        userSettingsOrHealth.profile
-                                    ? Colors.white
-                                    : Colors.black),
-                          ),
-                        ),
+
+                    child: Container(
+                      margin: EdgeInsets.only(right: 14),
+                      width: MediaQuery.of(context).size.width / 2.3,
+                      decoration: BoxDecoration(
+                          color: selectedSettingType ==
+                                  userSettingsOrHealth.profile
+                              ? Colors.deepPurple.shade800
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(50.0)),
+                      child: Center(
+                        child: Text(
+                          'Profile',
+                          style: ktextStyle().copyWith(
+                              color: selectedSettingType ==
+                                      userSettingsOrHealth.profile
+                                  ? Colors.white
+                                  : Colors.black),
+        ),
                       ),
                     ),
                   ),
@@ -71,25 +72,25 @@ class _UserProfileState extends State<UserProfile> {
                         selectedSettingType = userSettingsOrHealth.health;
                       });
                     },
-                    child: Expanded(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 2.3,
-                        decoration: BoxDecoration(
+
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 2.3,
+                      decoration: BoxDecoration(
+                          color:
+                              selectedSettingType == userSettingsOrHealth.health
+                                  ? Colors.deepPurple.shade800
+                                  : Colors.transparent,
+                          borderRadius: BorderRadius.circular(50.0)),
+                      child: Center(
+                          child: Text(
+                        'My Health',
+                        style: ktextStyle().copyWith(
                             color: selectedSettingType ==
                                     userSettingsOrHealth.health
-                                ? Colors.deepPurple.shade800
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(50.0)),
-                        child: Center(
-                            child: Text(
-                          'My Health',
-                          style: ktextStyle().copyWith(
-                              color: selectedSettingType ==
-                                      userSettingsOrHealth.health
-                                  ? Colors.white
-                                  : Colors.black),
-                        )),
-                      ),
+                                ? Colors.white
+                                : Colors.black),
+                      )),
+
                     ),
                   ),
                 ],

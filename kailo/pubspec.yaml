@@ -43,6 +43,7 @@ dependencies:
   countup: ^0.1.3
   image_picker: ^0.7.5+3
   provider: ^5.0.0
+  firebase_storage: ^8.1.0
 
   
 dev_dependencies:

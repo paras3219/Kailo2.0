@@ -18,13 +18,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _controller = PageController();
   int pageIndex = 0;
-
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -58,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Colors.blueGrey.shade50,
         body: PageView(
+          physics: NeverScrollableScrollPhysics(),
           controller: _controller,
           children: <Widget>[
             DashBoardScreen(),
