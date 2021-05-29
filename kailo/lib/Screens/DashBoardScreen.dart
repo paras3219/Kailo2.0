@@ -25,10 +25,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   bool isLoading = false;
   void currentUser() async {
     User curr = await getCurrentUser();
+    var data = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(curr.uid)
+        .get();
+
     this.setState(() {
       if (curr.displayName != null) {
         name = curr.displayName.split(" ")[0];
-        profilePhoto = curr.photoURL;
+        profilePhoto = data.data()["profile_photo"];
       } else {
         name = "";
       }
