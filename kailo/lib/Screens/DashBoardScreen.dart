@@ -46,7 +46,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         .doc(user.uid)
         .collection("posts")
         .snapshots();
-    print("-----------------here-------------------");
+
     stream.listen((snapshot) {
       snapshot.docs.forEach((element) {
         PostModel post = PostModel.fromMap(element.data());
@@ -56,7 +56,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       });
     });
     this.setState(() {
+      print("-----------------here-------------------");
       isLoading = false;
+      print(posts.length);
     });
     print(posts);
   }
@@ -114,11 +116,20 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ),
                       SizedBox(
                         height: 30,
-                      )
+                      ),
+                      posts.length == 0
+                          ? Container(
+                              child: Text("please add somethiing"),
+                            )
+                          : Container()
                     ],
                   );
           }
           index -= 1;
+          if (posts.length == 0) {
+            return Container(
+                height: 2000, color: Colors.red, child: Text("some"));
+          }
           PostModel temp = posts[index];
           return PostItem(
             content: temp.content,
