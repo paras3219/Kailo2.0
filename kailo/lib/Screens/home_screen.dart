@@ -18,18 +18,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _controller = PageController();
   int pageIndex = 0;
-
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     var scaffoldKey = GlobalKey<ScaffoldState>();
     return MaterialApp(
       home: Scaffold(
+
         endDrawer: Drawer(
         child: Column(
             children: [
@@ -72,12 +71,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ]),
+
               )
             ],
           ),
         ),
         backgroundColor: Colors.blueGrey.shade50,
         body: PageView(
+          physics: NeverScrollableScrollPhysics(),
           controller: _controller,
           children: <Widget>[
             DashBoardScreen(),
@@ -118,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print("----------------------------------------------------");
     if (pageIndex < 2.0) {
       return FloatingActionButton(
-        onPressed: () => Navigator.push(
+        onPressed: () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (conext) => AddActivity())),
         child: const FaIcon(FontAwesomeIcons.pen),
         backgroundColor: Colors.purple[400],

@@ -28,7 +28,7 @@ class PostItem extends StatefulWidget {
 
 class _PostItemState extends State<PostItem> {
   String statusOfPostItem;
-
+  bool isShared = false;
   void addPostToDataBase(BuildContext context) async {
     VoidCallback continueCallBack = () async {
       User user = await getCurrentUser();
@@ -44,7 +44,9 @@ class _PostItemState extends State<PostItem> {
           .collection("feed")
           .doc(DateTime.now().toString())
           .set(post.toMap(post));
+      
       Navigator.of(context, rootNavigator: true).pop();
+
       // code on continue comes here
     };
     BlurryDialog alert = BlurryDialog("Upload Experience",
@@ -56,6 +58,34 @@ class _PostItemState extends State<PostItem> {
         return alert;
       },
     );
+  }
+
+  String monthConvertor(String curr) {
+    if (curr == "01") {
+      return "Jan";
+    } else if (curr == "02") {
+      return "Feb";
+    } else if (curr == "03") {
+      return "Mar";
+    } else if (curr == "04") {
+      return "Apr";
+    } else if (curr == "05") {
+      return "May";
+    } else if (curr == "06") {
+      return "June";
+    } else if (curr == "07") {
+      return "July";
+    } else if (curr == "08") {
+      return "Aug";
+    } else if (curr == "09") {
+      return "Sept";
+    } else if (curr == "10") {
+      return "Oct";
+    } else if (curr == "11") {
+      return "Nov";
+    } else if (curr == "12") {
+      return "Dec";
+    }
   }
 
   @override
@@ -80,14 +110,15 @@ class _PostItemState extends State<PostItem> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    widget.time.toString().split(" ")[0],
+                    widget.time.toString().split(" ")[1].split(".")[0],
                     style: TextStyle(
                         fontSize: 10.0,
                         fontStyle: FontStyle.italic,
                         color: Colors.white70),
                   ),
                   Text(
-                    "May",
+                    monthConvertor(
+                        widget.time.toString().split(" ")[0].split("-")[1]),
                     style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
@@ -144,10 +175,13 @@ class _PostItemState extends State<PostItem> {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                  color: Colors.greenAccent, blurRadius: 5.0)
+                                  color: isShared == true
+                                      ? Colors.greenAccent
+                                      : Colors.redAccent,
+                                  blurRadius: 5.0)
                             ],
                             borderRadius: BorderRadius.circular(100),
-                            color: Colors.green,
+                            color: isShared == true ? Colors.green : Colors.red,
                           ),
                         ),
                       ],

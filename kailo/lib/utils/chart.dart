@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:kailo/models/testModel.dart';
 
 class MyHealthChart extends StatefulWidget {
+  final List<TestModel> prevResults;
+  final int length;
+
+  MyHealthChart(this.prevResults, this.length);
   @override
   State<StatefulWidget> createState() => MyHealthChartState();
 }
 
 class MyHealthChartState extends State<MyHealthChart> {
   bool isShowingMainData;
+
+  List<FlSpot> makeSpots() {
+    List<double> yValues = [];
+    for (int i = 0; i < widget.length; i++) {
+      yValues.add(widget.prevResults[i].result.toDouble() / 10);
+    }
+
+    return yValues.asMap().entries.map((e) {
+      return FlSpot(e.key.toDouble(), e.value);
+    }).toList();
+  }
 
   @override
   void initState() {
@@ -96,12 +112,6 @@ class MyHealthChartState extends State<MyHealthChart> {
           margin: 10,
           getTitles: (value) {
             switch (value.toInt()) {
-              case 2:
-                return 'SEPT';
-              case 4:
-                return 'OCT';
-              case 6:
-                return 'DEC';
             }
             return '';
           },
@@ -116,17 +126,15 @@ class MyHealthChartState extends State<MyHealthChart> {
           getTitles: (value) {
             switch (value.toInt()) {
               case 1:
-                return '20';
+                return '10';
               case 2:
-                return '40';
+                return '20';
               case 3:
-                return '60';
+                return '30';
               case 4:
-                return '80';
-              case 5:
-                return '100';
+                return '40';
             }
-            return '';
+            return "";
           },
           margin: 8,
           reservedSize: 30,
@@ -149,9 +157,9 @@ class MyHealthChartState extends State<MyHealthChart> {
               color: Colors.transparent,
             ),
           )),
-      minX: 0,
-      maxX: 14,
-      maxY: 6,
+      maxX: widget.length.toDouble(),
+      minX: -1,
+      maxY: 4,
       minY: 0,
       lineBarsData: linesBarData2(),
     );
@@ -160,21 +168,18 @@ class MyHealthChartState extends State<MyHealthChart> {
   List<LineChartBarData> linesBarData2() {
     return [
       LineChartBarData(
-        spots: [
-          FlSpot(1, 3.8),
-          FlSpot(3, 1.9),
-          FlSpot(6, 5),
-          FlSpot(10, 3.3),
-          FlSpot(13, 4.5),
-        ],
+        preventCurveOverShooting: true,
+        spots: makeSpots() == null ? [] : makeSpots(),
         isCurved: true,
         curveSmoothness: 0,
         colors: const [
           Colors.blue,
         ],
-        barWidth: 2,
-        isStrokeCapRound: true,
-        dotData: FlDotData(show: true),
+        barWidth: 4,
+        isStrokeCapRound: false,
+        dotData: FlDotData(
+          show: true,
+        ),
         belowBarData: BarAreaData(
           show: false,
         ),

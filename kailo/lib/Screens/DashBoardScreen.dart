@@ -23,12 +23,17 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   String profilePhoto = "http://simpleicon.com/wp-content/uploads/account.png";
   List<PostModel> posts = [];
   bool isLoading = false;
-  void currentUser() async {
+  Future<void> currentUser() async {
     User curr = await getCurrentUser();
+    var data = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(curr.uid)
+        .get();
+
     this.setState(() {
       if (curr.displayName != null) {
         name = curr.displayName.split(" ")[0];
-        profilePhoto = curr.photoURL;
+        profilePhoto = data.data()["profile_photo"];
       } else {
         name = "";
       }
@@ -46,7 +51,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         .doc(user.uid)
         .collection("posts")
         .snapshots();
-    print("-----------------here-------------------");
+
     stream.listen((snapshot) {
       snapshot.docs.forEach((element) {
         PostModel post = PostModel.fromMap(element.data());
@@ -56,9 +61,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       });
     });
     this.setState(() {
+      print("-----------------here-------------------");
       isLoading = false;
+      print(posts.length);
     });
-    print(posts);
   }
 
   @override
@@ -80,7 +86,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           if (index == 0) {
             return isLoading
                 ? Center(
-                    child: Text("Loafding.."),
+                    child: Text("Loading.."),
                   )
                 : Column(
                     children: [
@@ -114,11 +120,20 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ),
                       SizedBox(
                         height: 30,
-                      )
+                      ),
+                      posts.length == 0
+                          ? Container(
+                              child: Text("please add somethiing"),
+                            )
+                          : Container()
                     ],
                   );
           }
           index -= 1;
+          if (posts.length == 0) {
+            return Container(
+                height: 2000, color: Colors.red, child: Text("some"));
+          }
           PostModel temp = posts[index];
           return PostItem(
             content: temp.content,

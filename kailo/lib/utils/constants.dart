@@ -16,11 +16,13 @@ InputDecoration ktextFieldDecoration(String hintText) {
 TextStyle ktextStyle() {
   return TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold);
 }
-List<double> scoreValues = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
+
+List<double> scoreValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 enum Gender {
   male,
   female,
 }
+double finalTestScore = 0;
 enum userSettingsOrHealth {
   profile,
   health,

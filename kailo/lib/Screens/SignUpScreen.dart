@@ -144,6 +144,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: TextFormField(
                       controller: _passwordController,
                       onSaved: (text) => this._password = text,
+                      obscureText: true,
                       decoration: new InputDecoration(
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
@@ -165,6 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Colors.grey.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(20)),
                     child: TextFormField(
+                      obscureText: true,
                       decoration: new InputDecoration(
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,

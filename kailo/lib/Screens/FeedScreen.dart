@@ -37,6 +37,8 @@ class _FeedScreenState extends State<FeedScreen> {
       print(feeds.length);
     });
     this.setState(() {
+      List<PostModel> newFeeds = new List.from(feeds.reversed);
+      feeds = newFeeds;
       isLoading = false;
     });
   }
@@ -59,7 +61,7 @@ class _FeedScreenState extends State<FeedScreen> {
           if (index == 0) {
             return isLoading
                 ? Center(
-                    child: Text("Loafding.."),
+                    child: Text("Loading.."),
                   )
                 : Column(
                     children: [
@@ -67,7 +69,7 @@ class _FeedScreenState extends State<FeedScreen> {
                         height: 40,
                       ),
                       Container(
-                        child: Text("Feed",
+                        child: Text("Global Feed",
                             style: GoogleFonts.roboto(
                                 fontSize: 40,
                                 letterSpacing: 4,

@@ -25,27 +25,49 @@ class FeedCard extends StatefulWidget {
 }
 
 class _FeedCardState extends State<FeedCard> {
-  String name = null;
-  String profilePhoto = null;
+  String name;
+  String profilePhoto;
   bool isLoading = false;
+  int likes = 0;
 
-  void increaseLikes() {
-    FirebaseFirestore.instance.collection("feed").doc(widget.uid);
+  void increaseLikes() async {
+    Stream<QuerySnapshot> stream =
+        FirebaseFirestore.instance.collection("feed").snapshots();
+    print("-----------------here-------------------");
+
+    stream.listen((snapshot) {
+      snapshot.docs.forEach((element) {
+        if (element.data()["title"] == widget.title) {}
+      });
+    });
+
+    // print(data.data());
+
+    print("########################");
+    this.setState(() {
+      likes = likes == 0 ? 1 : 0;
+    });
   }
 
   void createName() async {
     this.setState(() {
       isLoading = true;
     });
-    var data = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(widget.uid)
-        .get();
-    this.setState(() {
-      name = data.data()["name"];
-      profilePhoto = data.data()["profile_photo"];
-      isLoading = false;
-    });
+
+    try {
+      var data = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(widget.uid)
+          .get();
+      this.setState(() {
+        print(data.data());
+        name = data.data()["name"] == null ? "Anonymous" : data.data()["name"];
+        profilePhoto = data.data()["profile_photo"];
+        isLoading = false;
+      });
+    } catch (err) {
+      print("error");
+    }
   }
 
   @override
@@ -66,6 +88,12 @@ class _FeedCardState extends State<FeedCard> {
               )
             : Container(
                 decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 3,
+                    )
+                  ],
                   borderRadius: BorderRadius.circular(10.0),
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -108,7 +136,9 @@ class _FeedCardState extends State<FeedCard> {
                         )
                       ]),
                     ),
-                    Divider(color: Colors.red),
+                    Divider(
+                      color: Colors.red,
+                    ),
                     Row(
                       children: <Widget>[
                         Expanded(
@@ -140,10 +170,17 @@ class _FeedCardState extends State<FeedCard> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(FontAwesomeIcons.heart),
+                              InkWell(
+                                  onTap: () => increaseLikes(),
+                                  child: Icon(
+                                    likes == 0
+                                        ? FontAwesomeIcons.heart
+                                        : FontAwesomeIcons.solidHeart,
+                                    color: Colors.red,
+                                  )),
                               SizedBox(height: 2.0),
                               Text(
-                                widget.likes.toString(),
+                                likes.toString(),
                               ),
                             ],
                           ),
