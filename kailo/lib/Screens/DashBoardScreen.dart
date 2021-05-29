@@ -23,7 +23,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   String profilePhoto = "http://simpleicon.com/wp-content/uploads/account.png";
   List<PostModel> posts = [];
   bool isLoading = false;
-  void currentUser() async {
+  Future<void> currentUser() async {
     User curr = await getCurrentUser();
     this.setState(() {
       if (curr.displayName != null) {
@@ -58,7 +58,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     this.setState(() {
       isLoading = false;
     });
-    print(posts);
   }
 
   @override
@@ -80,7 +79,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           if (index == 0) {
             return isLoading
                 ? Center(
-                    child: Text("Loafding.."),
+                    child: Text("Loading.."),
                   )
                 : Column(
                     children: [

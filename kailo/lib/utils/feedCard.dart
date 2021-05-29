@@ -52,7 +52,6 @@ class _FeedCardState extends State<FeedCard> {
     } catch (err) {
       print("error");
     }
-
   }
 
   @override
@@ -73,6 +72,12 @@ class _FeedCardState extends State<FeedCard> {
               )
             : Container(
                 decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 3,
+                    )
+                  ],
                   borderRadius: BorderRadius.circular(10.0),
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -115,7 +120,9 @@ class _FeedCardState extends State<FeedCard> {
                         )
                       ]),
                     ),
-                    Divider(color: Colors.red),
+                    Divider(
+                      color: Colors.red,
+                    ),
                     Row(
                       children: <Widget>[
                         Expanded(

@@ -14,7 +14,7 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
   String name;
   int age;
   String profilePhoto;
-  void createUserProfile() async {
+  Future<void> createUserProfile() async {
     User user = await getCurrentUser();
     try {
       var data = await FirebaseFirestore.instance
@@ -35,7 +35,6 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
 
   @override
   void initState() {
-    // TODO: implement initState
     createUserProfile();
     super.initState();
   }
@@ -51,9 +50,10 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
               Align(
                 alignment: Alignment.center,
                 child: CircleAvatar(
-                  backgroundImage: profilePhoto == null
-                      ? AssetImage('assets/images/profile.png')
-                      : NetworkImage(profilePhoto),
+                  backgroundColor: Colors.white,
+                  backgroundImage: profilePhoto != null
+                      ? NetworkImage(profilePhoto)
+                      : AssetImage('assets/images/profile.png'),
                   radius: 70.0,
                 ),
               ),
@@ -76,7 +76,7 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
                           heightFactor: 1,
                           alignment: Alignment.center,
                           child: Text(
-                            name == null ? "No Name" : name,
+                            name == null ? "Your name" : name,
                             style: TextStyle(
                               fontSize: 40.0,
                             ),
@@ -86,7 +86,7 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
                           heightFactor: 6.0,
                           alignment: Alignment.center,
                           child: Text(
-                            age == null ? 'Age: No age ' : "Age: ${age}",
+                            age == null ? 'Age' : "Age: ${age}",
                             style: TextStyle(
                               fontSize: 20.0,
                             ),
@@ -130,36 +130,44 @@ class _ViewUserSettingsState extends State<ViewUserSettings> {
                                             EditUserSettings()));
                               }),
                         ),
-                        Align(
-                          widthFactor: 1.5,
-                          heightFactor: 7.5,
-                          alignment: Alignment.center,
-                          child: Container(
-                            child: Text(
-                              "Bio",
-                              style: TextStyle(
-                                fontSize: 35.0,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              heightFactor: 9.2,
+                              alignment: Alignment.center,
+                              child: Container(
+                                child: Text(
+                                  "Bio",
+                                  style: TextStyle(
+                                      fontSize: 35.0,
+                                      fontWeight: FontWeight.w300),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              child: Text(bio == null ? "No Bio" : bio),
-                              height: 250.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30.0),
-                                  topRight: Radius.circular(30.0),
-                                  bottomLeft: Radius.circular(30.0),
-                                  bottomRight: Radius.circular(30.0),
-                                ),
-                                color: Colors.white,
+                        Align(
+                          heightFactor: 2.2,
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            padding: EdgeInsets.all(10.0),
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            child: Text(
+                              bio == null ? "" : bio,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 25.0, fontWeight: FontWeight.w300),
+                            ),
+                            height: 200.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30.0),
+                                topRight: Radius.circular(30.0),
+                                bottomLeft: Radius.circular(30.0),
+                                bottomRight: Radius.circular(30.0),
                               ),
+                              color: Colors.white,
                             ),
                           ),
                         ),
