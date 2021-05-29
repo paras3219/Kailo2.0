@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kailo/Screens/DashBoardScreen.dart';
 import 'package:kailo/Screens/FeedScreen.dart';
+import 'package:kailo/Screens/aboutUs.dart';
 import 'package:kailo/Screens/add_activity.dart';
 import 'package:kailo/Screens/userSettings.dart';
 import 'package:kailo/Screens/testScreen.dart';
 import 'package:kailo/resources/authentication.dart';
-
 import 'userSettings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,24 +30,49 @@ class _HomeScreenState extends State<HomeScreen> {
     var scaffoldKey = GlobalKey<ScaffoldState>();
     return MaterialApp(
       home: Scaffold(
-        drawer: new Drawer(
-          child: new ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              // DrawerHeader(
-              //   child: Text('Drawer Header'),
-              //   decoration: BoxDecoration(
-              //     color: Colors.blue,
-              //   ),
-              // ),
-              SizedBox(
-                height: 60,
+        endDrawer: Drawer(
+        child: Column(
+            children: [
+              Expanded(
+                flex: 0,
+                child: Container(
+                  child: UserAccountsDrawerHeader(
+                    accountName: Text("Ashish Rawat"),
+                    accountEmail: Text("ashishrawat2911@gmail.com"),
+                    currentAccountPicture: CircleAvatar(
+                      radius: 250.0,
+                      backgroundColor:
+                          Theme.of(context).platform == TargetPlatform.iOS
+                              ? Colors.blue
+                              : Colors.white,
+                      child: Text(
+                        "A",
+                        style: TextStyle(fontSize: 40.0),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              ListTile(
-                  title: Text('Logout'),
-                  onTap: () => signOutUser().then(
-                        (value) => Navigator.pop(context),
-                      ))
+              Expanded(
+                flex: 1,
+                child: ListView(
+                  children: [
+                  ListTile(
+                    leading: Icon(Icons.info_outline),
+                    title: Text("About Us"),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.power_settings_new),
+                    title: Text("LogOut"),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ]),
+              )
             ],
           ),
         ),
